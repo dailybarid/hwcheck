@@ -6,6 +6,16 @@
        width="100%">
 </p>
 
+<p align="center">
+  <a href="https://github.com/dailybarid/hwcheck/actions/workflows/checks.yml"><img
+     src="https://github.com/dailybarid/hwcheck/actions/workflows/checks.yml/badge.svg"
+     alt="checks"></a>
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT">
+  <img src="https://img.shields.io/badge/languages-EN%20%7C%20FR%20%7C%20AR-success.svg"
+       alt="English, French, Arabic">
+  <img src="https://img.shields.io/badge/checks-14-informational.svg" alt="14 checks">
+</p>
+
 Boot a laptop that has **no operating system** from this USB stick and it walks
 you through testing every piece of hardware, then writes a verdict and a report
 back onto the stick.
@@ -92,8 +102,10 @@ session. Once built, the stick needs no internet to be useful.
 .
 ├── build-usb.sh            writes the kit onto a USB stick (DESTRUCTIVE)
 ├── HOWTO-USE.txt           instructions copied to the stick for the buyer
+├── CHANGELOG.md            release history
+├── .github/workflows/      CI: privacy scan, catalogs, self-test, syntax
 ├── docs/PROJECT-LOG.md     engineering log: decisions, defects, what is verified
-├── docs/assets/            logo + README header (hand-written SVG, PNG exports)
+├── docs/assets/            logo, README header, social card (SVG + PNG)
 ├── hwcheck/                the payload that ends up on the stick
 │   ├── hwcheck.py          the checker
 │   ├── i18n.py  lang/      translation layer + catalogs
@@ -102,9 +114,11 @@ session. Once built, the stick needs no internet to be useful.
 │   ├── build-deb-bundle.sh rebuilds the offline package set
 │   └── build/              pristine English source, used by the i18n pipeline
 └── tools/                  build-machine tooling, NOT shipped on the stick
+    ├── check_clean.py      refuse to publish machine-specific data
+    ├── check_translations.py  catalogs match the source, and are complete
+    ├── selftest.py         load the i18n layer and exercise it
     ├── i18n_pipeline.py    extract every display string into a catalog
-    ├── integrate.py        wire the catalog into the program
-    └── check_clean.py      refuse to publish machine-specific data
+    └── integrate.py        wire the catalog into the program
 ```
 
 `iso/`, `ventoy/` and the `.deb` set are **not** in the repository — they are
@@ -299,18 +313,30 @@ Named `tr()` and not `t()` on purpose: several checker functions assign to a
 local `t` (temperatures, thread handles), which would shadow the translator and
 raise `UnboundLocalError` at the call site.
 
-## Publishing checklist
+## Checks and CI
+
+Three tools gate a release, and all three run automatically on every push and
+pull request (see `.github/workflows/checks.yml`):
 
 ```bash
-python3 tools/check_clean.py     # must print CLEAN
+python3 tools/check_clean.py          # must print CLEAN - no private data
+python3 tools/check_translations.py   # catalogs match the source
+python3 tools/selftest.py             # the i18n layer loads and resolves
 ```
 
-This tool records machine identities by design, so its own test output is the
-easiest thing to leak: serials, BIOS versions, MAC addresses, disk models,
-battery data. `check_clean.py` scans every committed file for absolute home
-paths, MAC/IP addresses, e-mail addresses, DMI fingerprints and serial
-assignments. `report/`, `iso/`, `ventoy/` and `*.deb` are gitignored for the
-same reason.
+**`check_clean.py` is the one that matters most here.** This tool records
+machine identities by design, so its own test output is the easiest thing to
+leak: serials, BIOS versions, MAC addresses, disk models, battery data. It scans
+every committed file for absolute home paths, MAC/IP addresses, e-mail
+addresses, DMI fingerprints and serial assignments. `report/`, `iso/`,
+`ventoy/` and `*.deb` are gitignored for the same reason. Add your own machine's
+fingerprints to its `FORBIDDEN` list.
+
+CI also compiles every Python file, `bash -n`-checks every script, and asserts
+that all fourteen check sections are actually referenced in the run plan — a
+section that exists but was never wired in would silently never run.
+
+Release history is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Gotchas that cost real time to find
 

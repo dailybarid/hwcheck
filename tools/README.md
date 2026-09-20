@@ -40,6 +40,23 @@ wraps them badly.
 `lang/en.py` is the reference. Every other catalog must define exactly the same
 key set.
 
+## selftest.py — exercise the i18n layer
+
+```bash
+python3 tools/selftest.py
+```
+
+Imports the real `i18n` module, activates every language, and checks running
+behaviour: the module loads, catalogs populate, labels resolve, placeholder
+substitution leaves nothing behind, unknown keys degrade safely, and the RTL
+flag follows the language.
+
+The overlap with `check_translations.py` is deliberate — they fail for different
+reasons. `check_translations.py` catches a catalog that is wrong **as data**.
+This catches one that looks fine as data but does not survive being loaded and
+used: a syntax error, a broken import, a regression in `i18n.py` itself, or a
+catalog that silently fails to merge and leaves the program in English.
+
 ## i18n_pipeline.py + integrate.py — the migration (run once, already done)
 
 ```bash

@@ -220,10 +220,15 @@ elements — centring both on the same x made them overlap and read as
 - **To change the ISO:** drop the new ISO in `iso/`, rebuild the bundle against
   that distro's base (`--iso-list` pointing at its package list), and re-run the
   boot test. The bundle's package base must match the ISO.
-- **Before publishing:** `tools/check_clean.py` must print CLEAN. This tool
-  records machine identities by design — serials, BIOS versions, disk models,
-  battery data — so its own test output is the easiest thing to leak. Reports
-  are therefore gitignored.
+- **Before publishing:** `tools/check_clean.py` must print CLEAN, and it now
+  runs automatically on every push and pull request
+  (`.github/workflows/checks.yml`), so it cannot be forgotten. This tool records
+  machine identities by design — serials, BIOS versions, disk models, battery
+  data — so its own test output is the easiest thing to leak. Reports are
+  therefore gitignored.
+- **Release history** lives in `CHANGELOG.md` (Keep a Changelog format). Add an
+  entry under `[Unreleased]` as you work; this log is the narrative, the
+  changelog is the list.
 - **The migration pipeline** (`tools/i18n_pipeline.py` + `tools/integrate.py`)
   exists only to re-extract strings if the English source changes. It needs
   `hwcheck/build/hwcheck_english.py`, the pristine English input.
