@@ -1,0 +1,53 @@
+# ---------------------------------------------------------------------------
+# Large binaries. Never commit these - regenerate them locally:
+#   ISO      : build-usb.sh expects them in iso/ (see README, "Getting the ISOs")
+#   Ventoy   : tar xzf ventoy-*-linux.tar.gz -C ventoy/
+#   .deb set : tools/hwcheck/build-deb-bundle.sh
+# ---------------------------------------------------------------------------
+iso/
+ventoy/
+debs/
+*.deb
+*.iso
+*.img
+
+# ---------------------------------------------------------------------------
+# Test output. A report contains the TESTED machine's serial number, BIOS
+# version, disk model and battery data - that is exactly the data this tool
+# exists to record, but it does not belong in a public repository.
+# ---------------------------------------------------------------------------
+report/
+tools/report/
+hwcheck-report/
+
+# ---------------------------------------------------------------------------
+# Build artifacts of the i18n migration (see tools/README.md).
+# hwcheck/build/hwcheck_english.py IS committed - it is the pipeline's input.
+# ---------------------------------------------------------------------------
+hwcheck/build/hwcheck_extracted.py
+hwcheck/build/*.log
+hwcheck/lang/_inventory.json
+
+# ---------------------------------------------------------------------------
+# Runtime logs
+# ---------------------------------------------------------------------------
+*.log
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---------------------------------------------------------------------------
+# Editors / OS
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db

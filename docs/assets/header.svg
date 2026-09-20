@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  HWCheck README header.  Source of truth for docs/assets/header.png.
+
+  Rendered with Inkscape (Pango), which shapes the Arabic chip correctly.
+  The published asset is the PNG, not this file: a raster header needs no fonts
+  on the viewer's machine, and GitHub renders it identically for everyone.
+
+  Deliberately self-contained on its own dark ground so it looks intentional on
+  both GitHub light and dark themes, rather than only blending into one.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" width="1600" height="400"
+     role="img" aria-label="HWCheck - hardware verification for a used laptop">
+  <title>HWCheck</title>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141e34"/>
+      <stop offset="0.55" stop-color="#0b1222"/>
+      <stop offset="1" stop-color="#080d18"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eef7"/>
+      <stop offset="1" stop-color="#aab8cd"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d5178"/>
+      <stop offset="1" stop-color="#26344f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ground -->
+  <rect width="1600" height="400" fill="url(#bg)"/>
+
+  <!-- faint circuit traces on the right, low contrast so they never compete -->
+  <g stroke="#1d2b46" stroke-width="3" fill="none" opacity="0.9">
+    <path d="M1080 300 H1180 L1214 266 H1320 L1354 300 H1470"/>
+    <path d="M1180 120 H1290 L1324 154 H1450"/>
+    <path d="M1470 300 V232 L1500 202 H1570"/>
+    <path d="M1450 154 V 96 H1560"/>
+  </g>
+  <g fill="#1d2b46">
+    <circle cx="1180" cy="300" r="7"/><circle cx="1320" cy="300" r="7"/>
+    <circle cx="1290" cy="120" r="7"/><circle cx="1470" cy="300" r="7"/>
+    <circle cx="1450" cy="154" r="7"/>
+  </g>
+
+  <!-- the mark: USB stick in profile over an ECG trace (see logo.svg) -->
+  <g transform="translate(29,73) scale(0.47)">
+    <rect x="96" y="145" width="116" height="120" rx="14" fill="url(#metal)"/>
+    <rect x="118" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+    <rect x="158" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+    <rect x="212" y="125" width="216" height="160" rx="34" fill="url(#body)"/>
+    <rect x="212" y="125" width="216" height="160" rx="34" fill="none"
+          stroke="#4a5f89" stroke-width="5"/>
+    <circle cx="392" cy="205" r="13" fill="#10b981"/>
+    <path d="M88 326 H176 L216 260 L266 388 L310 296 L336 326 H424"
+          fill="none" stroke="#10b981" stroke-width="24"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="286" y="196" font-family="DejaVu Sans Mono" font-weight="bold"
+        font-size="96" letter-spacing="1">
+    <tspan fill="#f8fafc">HW</tspan><tspan fill="#10b981">Check</tspan>
+  </text>
+
+  <!-- tagline -->
+  <text x="288" y="252" font-family="DejaVu Sans" font-size="28" fill="#93a4bd">
+    Hardware verification for a used laptop &#8212; no OS required.
+  </text>
+
+  <!-- feature chips -->
+  <g font-family="DejaVu Sans" font-size="23" fill="#c9d6e8">
+    <rect x="286" y="292" width="284" height="46" rx="23" fill="#16203a"/>
+    <text x="310" y="322">14 hardware checks</text>
+
+    <rect x="586" y="292" width="252" height="46" rx="23" fill="#16203a"/>
+    <text x="610" y="322">boots with no OS</text>
+
+    <rect x="854" y="292" width="150" height="46" rx="23" fill="#16203a"/>
+    <text x="878" y="322">EN &#183; FR</text>
+
+    <rect x="1020" y="292" width="162" height="46" rx="23" fill="#16203a"/>
+    <text x="1044" y="322" font-family="Noto Sans Arabic">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</text>
+  </g>
+
+  <!-- verdict accent: the three colours the report actually prints -->
+  <g>
+    <circle cx="1236" cy="315" r="9" fill="#10b981"/>
+    <circle cx="1272" cy="315" r="9" fill="#f59e0b"/>
+    <circle cx="1308" cy="315" r="9" fill="#ef4444"/>
+  </g>
+
+  <!-- bottom accent -->
+  <rect x="0" y="394" width="1600" height="6" fill="#10b981" opacity="0.85"/>
+</svg>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  HWCheck mark.
+  Design constraints, in priority order:
+    1. must still read at 40x40 px (the size GitHub renders a repo avatar in
+       list views), so: one badge, one silhouette, one accent colour, and no
+       stroke thinner than ~8/512 units;
+    2. no text and no lettering - a wordmark cannot survive that scale, and it
+       keeps the file locale-neutral for the EN/FR/AR build;
+    3. flat geometry only, so it rasterises identically in every renderer.
+
+  Reading: a USB stick in PROFILE (the thing you plug in) over an ECG trace
+  (what the tool does - it examines a machine).
+
+  NOTE - an earlier version drew a USB-A plug head-on: a rounded rectangle with
+  two contact holes. Review called it "a laptop screen with two buttons", which
+  is exactly what it looks like. Profile is unambiguous: a body plus a narrower
+  metal tip is the shape everyone recognises as a flash drive.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     role="img" aria-label="HWCheck">
+  <title>HWCheck</title>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#131c31"/>
+      <stop offset="1" stop-color="#0a1020"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eef7"/>
+      <stop offset="1" stop-color="#aab8cd"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d5178"/>
+      <stop offset="1" stop-color="#26344f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- badge -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none"
+        stroke="#22304d" stroke-width="6"/>
+
+  <!-- USB stick, profile: metal tip on the left, body on the right -->
+  <rect x="96" y="145" width="116" height="120" rx="14" fill="url(#metal)"/>
+  <rect x="118" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+  <rect x="158" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+
+  <rect x="212" y="125" width="216" height="160" rx="34" fill="url(#body)"/>
+  <rect x="212" y="125" width="216" height="160" rx="34" fill="none"
+        stroke="#4a5f89" stroke-width="5"/>
+  <!-- activity LED -->
+  <circle cx="392" cy="205" r="13" fill="#10b981"/>
+
+  <!-- ECG trace: the accent colour the report prints for PASS -->
+  <path d="M88 326 H176 L216 260 L266 388 L310 296 L336 326 H424"
+        fill="none" stroke="#10b981" stroke-width="24"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

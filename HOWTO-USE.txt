@@ -1,0 +1,198 @@
+========================================================================
+              USED LAPTOP CHECKER - HOW TO USE THIS USB STICK
+========================================================================
+
+  This stick boots any laptop WITHOUT touching its hard drive, runs a
+  full hardware inspection, and writes a report back onto the stick.
+  Nothing on the laptop is changed. No OS required on the laptop.
+
+  LANGUAGES: English, Français, العربية.
+  The tool asks which one you want on the first screen - just pick a
+  number and press Enter. To skip the question, start it with the
+  language directly:
+
+        sudo ./RUN-HWCHECK.sh --lang fr      (français)
+        sudo ./RUN-HWCHECK.sh --lang ar      (العربية)
+        sudo ./RUN-HWCHECK.sh --lang en      (English)
+
+
+------------------------------------------------------------------------
+ STEP 1 - BOOT THE LAPTOP FROM THIS STICK
+------------------------------------------------------------------------
+
+ 1. Plug the stick into the laptop you want to inspect.
+
+ 2. Power the laptop on and IMMEDIATELY start tapping the boot-menu key
+    (about once per second). The key depends on the brand:
+
+        Lenovo / ThinkPad .... F12   (some: Fn+F12, or the Novo button
+                                      next to the power socket)
+        Dell ................. F12
+        HP ................... F9    (if that fails: Esc, then F9)
+        Asus ................. Esc   (if that fails: F8)
+        Acer ................. F12
+        Toshiba .............. F12
+        Samsung .............. F12 or Esc
+        MSI .................. F11
+        Sony VAIO ............ F11  (or the ASSIST button)
+        Fujitsu .............. F12
+        Huawei / Xiaomi ...... F12
+        Microsoft Surface .... hold Volume-Down while pressing power
+
+    A "Boot Menu" / "Boot Device Options" list should appear.
+    If nothing appears and the laptop just starts normally, reboot and
+    try the BIOS key instead: F2, Del, F1, or F10 - then set the USB
+    stick first in the boot order. (Also disable "Secure Boot" if the
+    stick refuses to boot.)
+
+ 3. In the boot menu pick the entry that mentions USB / the stick's
+    brand / "UEFI: ...". You will then see the Ventoy menu.
+
+ 4. In the Ventoy menu choose:  sparkylinux-8.4-x86_64-xfce.iso
+    and pick "SparkyLinux US English" (or your language - the menu also
+    has French and Arabic entries, which set up the correct locale).
+
+ 5. Wait ~1-2 minutes. You land on a Linux desktop. Do not install
+    anything - you are running from the stick only.
+
+    If you need a RAM test instead: pick  MemTest86Plus-8.10.iso
+    from the same menu. It runs on its own - let it complete at least
+    one full pass (30-60 minutes). ANY red error = faulty RAM.
+
+
+------------------------------------------------------------------------
+ STEP 2 - RUN THE HARDWARE CHECKER
+------------------------------------------------------------------------
+
+ 1. On the desktop, open the file manager and click the USB stick
+    (usually labelled "Ventoy") in the left sidebar.
+
+ 2. Open the folder  hwcheck
+
+ 3. Right-click on  RUN-HWCHECK.sh  ->  "Open in Terminal"  (or
+    "Execute"). If you are asked, choose "Run in Terminal".
+
+    If that does not work, open a Terminal and type:
+
+        cd /media/*/Ventoy/hwcheck
+        sudo ./RUN-HWCHECK.sh
+
+ 4. The first run installs the diagnostic tools from the stick
+    (offline - no internet needed). It takes about 30 seconds.
+
+ 5. Then it walks you through every part of the machine. Just answer
+    the questions. Total time: 15-40 minutes for a full check.
+
+
+------------------------------------------------------------------------
+ STEP 3 - READ THE VERDICT
+------------------------------------------------------------------------
+
+ At the end you get one of:
+
+     GOOD - no hardware faults found
+     ACCEPTABLE - minor issues
+     BUY WITH CAUTION
+     DO NOT BUY / RENEGOTIATE
+
+ and a list of hard failures and warnings. The full report is saved to:
+
+     <USB stick>/report/<date>_<model>/report.html
+
+ Open report.html in a browser for a clean printable version, or
+ report.txt for plain text. Keep it - it is your record of the
+ machine's condition on the day you bought it.
+
+
+------------------------------------------------------------------------
+ WHAT THIS TOOL CHECKS
+------------------------------------------------------------------------
+
+   CPU ................ model, cores, real clock speed, temperature
+                        under full load, thermal throttling, fan
+   RAM ................ total, slots used, module speeds, optional
+                        pattern test (plus MemTest86+ on the stick)
+   STORAGE ............ SMART health, power-on hours, reallocated and
+                        pending sectors, SSD wear, read speed, kernel
+                        I/O errors
+   BATTERY ............ design vs actual capacity, cycle count,
+                        charging circuit, AC adapter
+   SCREEN ............. native resolution, physical size, backlight
+                        control, full-screen dead-pixel test, stuck
+                        pixels, backlight bleed, hinge cable faults
+   SOUND .............. speakers L/R, distortion at volume, microphone
+                        record + playback, headphone jack
+   KEYBOARD ........... every individual key, Fn/hotkeys, keycaps
+   TOUCHPAD ........... movement, buttons, edges, two-finger scroll,
+                        gestures, TrackPoint
+   WEBCAM ............. device, formats, real frame capture (saved to
+                        the report), image quality
+   NETWORK ............ wifi hardware + live scan, ethernet link,
+                        bluetooth, rfkill switches
+   USB ................ every port, plug/unplug events, over-current
+                        errors, write/read speed
+   SENSORS ............ temperatures, fan RPM, ACPI zones
+   CHASSIS ............ cracks, hinges, screws, liquid damage, and
+                        swollen battery (a hard fail - fire risk)
+   EXTRAS ............. fingerprint reader, TPM, card reader, HDMI,
+                        Thunderbolt, optical drive
+
+
+------------------------------------------------------------------------
+ THINGS NO SOFTWARE CAN CHECK - DO THEM BY HAND
+------------------------------------------------------------------------
+
+  * Open and close the lid 5 times. Any creak, snap, or wobble in the
+    hinges? Broken hinges are the most common ThinkPad/HP failure.
+  * Lay the laptop flat on a table. Does it rock? A warped chassis
+    means it has been dropped.
+  * Look for missing screws on the bottom cover - sign of a repair.
+  * Check the battery for ANY bulge. A swollen battery is a fire
+    hazard: do not buy the machine.
+  * Sniff the keyboard vents. Burnt plastic or cigarette smell means
+    abuse, and heat damage follows.
+  * Ask to see it running on battery for 10 minutes - does the
+    percentage drop sanely, or collapse?
+  * Ask the seller to log into the BIOS. Compare the reported CPU,
+    RAM and disk size against the advert. Swapped parts are common.
+  * On Lenovo: check the serial number on the sticker against the one
+    in the BIOS. A mismatch means a replaced mainboard.
+  * If the seller will not let you boot this stick, walk away.
+
+
+------------------------------------------------------------------------
+ TROUBLESHOOTING
+------------------------------------------------------------------------
+
+ "Secure Boot" error / stick does not boot
+     Enter the BIOS, disable Secure Boot, retry. Re-enable it after.
+
+ The laptop boots straight into its own OS
+     You are not hitting the boot-menu key early enough. Power on and
+     tap the key immediately, before the vendor logo finishes.
+
+ No sound during the audio test
+     Run  alsamixer  in a terminal and unmute (M key) the channels.
+
+ Brightness keys / Fn keys do nothing
+     Normal on some laptops under Linux. Test them in the BIOS or in
+     the seller's own Windows install before judging.
+
+ Screen test shows wrong colours
+     Some panels need a colour profile; ignore unless the pattern is
+     visibly banded or the wrong geometry.
+
+ Nothing works at all
+     Reboot and pick the "Failsafe" entry for the Sparky ISO in the
+     Ventoy menu (safe graphics drivers, no APIC/APM/MSI).
+
+ Need a root shell in the live session
+     The live user is  live  with password  live  (SPARKY's own choice,
+     not Debian's usual "user"). The root password is blank, so  sudo
+     never asks for a password.
+
+
+------------------------------------------------------------------------
+  hwcheck v1.0 - runs entirely from the USB stick, leaves no trace on
+  the tested machine's internal drives.
+========================================================================

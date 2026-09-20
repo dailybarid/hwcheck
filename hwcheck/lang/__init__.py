@@ -1,0 +1,1 @@
+"""Message catalogs for HWCheck."""
