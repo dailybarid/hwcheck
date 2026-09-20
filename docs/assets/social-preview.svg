@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  HWCheck social preview card - 1280x640 (2:1), the one image GitHub lets you
+  upload per repository (Settings > General > Social preview).
+
+  There is NO per-repository avatar on GitHub: a repo link with no social
+  preview shows the OWNER's avatar beside auto-generated metadata. So this card
+  is the only custom image worth making for the repo listing itself; the README
+  header covers the top of the page, and logo.png is for any context where a
+  square mark is needed.
+
+  Composition is centred and the type is large on purpose: this gets seen as a
+  small thumbnail in chat clients and social timelines, where a left-aligned
+  layout or fine detail disappears.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640"
+     role="img" aria-label="HWCheck - hardware verification for a used laptop, no OS required">
+  <title>HWCheck</title>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#141e34"/>
+      <stop offset="0.55" stop-color="#0b1222"/>
+      <stop offset="1" stop-color="#080d18"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eef7"/>
+      <stop offset="1" stop-color="#aab8cd"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d5178"/>
+      <stop offset="1" stop-color="#26344f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- faint circuit traces in the corners, kept well clear of the type -->
+  <g stroke="#1b2942" stroke-width="3" fill="none">
+    <path d="M60 150 H190 L224 116 H330"/>
+    <path d="M1230 470 H1100 L1066 504 H960"/>
+  </g>
+  <g fill="#1b2942">
+    <circle cx="190" cy="150" r="7"/><circle cx="1100" cy="470" r="7"/>
+  </g>
+
+  <!-- mark -->
+  <g transform="translate(458,-8) scale(0.706)">
+    <rect x="96" y="145" width="116" height="120" rx="14" fill="url(#metal)"/>
+    <rect x="118" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+    <rect x="158" y="181" width="28" height="44" rx="7" fill="#0b1220"/>
+    <rect x="212" y="125" width="216" height="160" rx="34" fill="url(#body)"/>
+    <rect x="212" y="125" width="216" height="160" rx="34" fill="none"
+          stroke="#4a5f89" stroke-width="5"/>
+    <circle cx="392" cy="205" r="13" fill="#10b981"/>
+    <path d="M88 326 H176 L216 260 L266 388 L310 296 L336 326 H424"
+          fill="none" stroke="#10b981" stroke-width="24"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="640" y="392" text-anchor="middle" font-family="DejaVu Sans Mono"
+        font-weight="bold" font-size="104" letter-spacing="1">
+    <tspan fill="#f8fafc">HW</tspan><tspan fill="#10b981">Check</tspan>
+  </text>
+
+  <!-- tagline -->
+  <text x="640" y="452" text-anchor="middle" font-family="DejaVu Sans"
+        font-size="33" fill="#93a4bd">
+    Hardware verification for a used laptop &#8212; no OS required.
+  </text>
+
+  <!-- chips - sized up deliberately: this card is seen as a thumbnail, and
+       small type here turns to mush long before the wordmark does -->
+  <g font-family="DejaVu Sans" font-size="26" fill="#c9d6e8">
+    <rect x="216" y="496" width="305" height="52" rx="26" fill="#16203a"/>
+    <text x="368" y="531" text-anchor="middle">14 hardware checks</text>
+
+    <rect x="539" y="496" width="277" height="52" rx="26" fill="#16203a"/>
+    <text x="677" y="531" text-anchor="middle">boots with no OS</text>
+
+    <!-- Two separate runs, not one string: centring them both on the same x
+         made them overlap and read as "FRالعربية". Anchor each edge instead. -->
+    <rect x="834" y="496" width="230" height="52" rx="26" fill="#16203a"/>
+    <text x="858" y="531">EN &#183; FR</text>
+    <text x="1042" y="531" text-anchor="end"
+          font-family="Noto Sans Arabic">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</text>
+  </g>
+
+  <!-- verdict colours the report actually prints -->
+  <g>
+    <circle cx="596" cy="596" r="9" fill="#10b981"/>
+    <circle cx="640" cy="596" r="9" fill="#f59e0b"/>
+    <circle cx="684" cy="596" r="9" fill="#ef4444"/>
+  </g>
+
+  <rect x="0" y="634" width="1280" height="6" fill="#10b981" opacity="0.85"/>
+</svg>

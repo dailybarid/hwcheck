@@ -154,9 +154,11 @@ Parse the ranges and test the actual codepoints.
 `docs/assets/` holds the mark and the README header. Both are hand-written SVG
 with the PNGs rendered from them by Inkscape.
 
-- `logo.svg` / `logo.png` (512px) / `logo-128.png` — the mark.
+- `logo.svg` / `logo.png` (512px) / `logo-128.png` — the square mark.
 - `header.svg` / `header.png` (3200x800, displayed at 1600x400) — the README
   header.
+- `social-preview.svg` / `social-preview.png` (1280x640) — upload this under
+  Settings → General → Social preview.
 
 Design constraints, and the reasoning behind the shapes:
 
@@ -180,18 +182,34 @@ Design constraints, and the reasoning behind the shapes:
 - The three dots in the header use the same green/amber/red the report prints
   for PASS / WARN / FAIL.
 
-Regenerate after editing either SVG:
+Regenerate after editing any SVG:
 
 ```bash
 cd docs/assets
-inkscape --export-type=png --export-filename=logo.png   --export-width=512  logo.svg
-inkscape --export-type=png --export-filename=logo-128.png --export-width=128 logo.svg
-inkscape --export-type=png --export-filename=header.png --export-width=3200 header.svg
+inkscape --export-type=png --export-filename=logo.png           --export-width=512  logo.svg
+inkscape --export-type=png --export-filename=logo-128.png       --export-width=128  logo.svg
+inkscape --export-type=png --export-filename=header.png         --export-width=3200 header.svg
+inkscape --export-type=png --export-filename=social-preview.png --export-width=1280 social-preview.svg
 ```
 
-**Set the repo avatar** to `logo.png` in the repository settings — that is the
-one place the square mark is used, and the README header covers the top of the
-page.
+**What GitHub actually lets you set, and what it does not:**
+
+- **Social preview** — Settings → General → Social preview. Upload
+  `social-preview.png` (must be 1280x640, under 1 MB — this one is ~86 KB). This
+  is the card shown when the repo link is unfurled in chat or on social.
+- **There is no per-repository avatar on GitHub.** A repo link with no social
+  preview shows the *owner's* avatar alongside auto-generated metadata: repo
+  name, description and language/stars/forks. So `logo.png` is not "the repo
+  picture" — it exists for any context that needs a square mark (elsewhere on
+  the web, a website, a print, an app tile). Do not go looking for an avatar
+  upload that does not exist.
+- The README header needs no configuration — it renders from the committed file.
+
+Type in these images is set at deliberately large sizes: a social card is seen
+as a thumbnail, and small text turns to mush well before a large wordmark does.
+Keep the two language runs in the social card as separate anchored `<text>`
+elements — centring both on the same x made them overlap and read as
+"FRالعربية".
 
 ## 9. Maintenance
 
